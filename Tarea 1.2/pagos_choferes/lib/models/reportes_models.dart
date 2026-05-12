@@ -1,4 +1,4 @@
-import 'package:tarea2/models/chofer_models.dart';
+import '../models/chofer_models.dart';
 
 class ReportesModels {
   final List<ChoferModels> choferes;
