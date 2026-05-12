@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "pagos_choferes" "\0"
+            VALUE "FileDescription", "tarea2" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "pagos_choferes" "\0"
+            VALUE "InternalName", "tarea2" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "pagos_choferes.exe" "\0"
-            VALUE "ProductName", "pagos_choferes" "\0"
+            VALUE "OriginalFilename", "tarea2.exe" "\0"
+            VALUE "ProductName", "tarea2" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

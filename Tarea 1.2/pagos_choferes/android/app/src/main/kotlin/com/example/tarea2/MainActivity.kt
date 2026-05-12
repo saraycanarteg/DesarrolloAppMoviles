@@ -1,4 +1,4 @@
-package com.example.pagos_choferes
+package com.example.tarea2
 
 import io.flutter.embedding.android.FlutterActivity
 
