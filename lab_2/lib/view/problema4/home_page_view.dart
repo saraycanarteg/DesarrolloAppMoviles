@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../controller/problema4_controller.dart';
+import '../../controller/cantidad_controller.dart';
 import '../../widgets/atoms/custom_button.dart';
 import '../../widgets/atoms/custom_input.dart';
 
@@ -9,7 +9,7 @@ class Problema4HomeView extends StatefulWidget {
 }
 
 class _Problema4HomeViewState extends State<Problema4HomeView> {
-  final controller = Problema4Controller();
+  final controller = CantidadController();
   final cantidadesController = TextEditingController();
 
   void _calcular() {

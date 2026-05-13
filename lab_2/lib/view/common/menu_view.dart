@@ -55,7 +55,16 @@ class MenuView extends StatelessWidget {
                 context,
                 "Problema 2",
                 "Incremento Salarial Profesor",
-                '/profesor',
+                '/problema2',
+              ),
+
+              const SizedBox(height: 20),
+
+              _menuItem(
+                context,
+                "Problema 3",
+                "Pedido de Hamburguesas",
+                '/problema3',
               ),
 
               const SizedBox(height: 20),

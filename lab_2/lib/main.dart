@@ -5,6 +5,8 @@ import 'view/problema1/home_page_view.dart';
 import 'view/problema1/resultado_page_view.dart';
 import 'view/problema2/profesor_view.dart';
 import 'view/problema2/resultado_profesor_view.dart';
+import 'view/problema3/home_page_view.dart' as problema3;
+import 'view/problema3/resultado_page_view.dart' as resultado_problema3;
 import 'view/problema4/home_page_view.dart' as problema4;
 import 'view/problema4/resultado_page_view.dart';
 
@@ -24,8 +26,10 @@ class MyApp extends StatelessWidget {
         '/menu': (context) => MenuView(),
         '/problema1': (context) => HomePaginaView(),
         '/resultado': (context) => ResultadoPageView(),
-        '/profesor': (context) => ProfesorView(),
+        '/problema2': (context) => ProfesorView(),
         '/resultado_profesor': (context) => ResultadoProfesorView(),
+        '/problema3': (context) => problema3.Problema3HomeView(),
+        '/resultado_problema3': (context) => resultado_problema3.Problema3ResultadoView(),
         '/problema4': (context) => problema4.Problema4HomeView(),
         '/resultado_problema4': (context) => Problema4ResultadoView(),
       },

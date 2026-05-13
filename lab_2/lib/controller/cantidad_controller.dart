@@ -1,6 +1,6 @@
-import '../model/problema4_model.dart';
+import '../model/cantidad_model.dart';
 
-class Problema4Controller {
+class CantidadController {
   Map<String, dynamic> calcularResultados(String cantidadesString) {
     if (cantidadesString.isEmpty) {
       return {"error": "Ingrese al menos una cantidad"};
@@ -28,7 +28,7 @@ class Problema4Controller {
       return {"error": "Ingrese al menos una cantidad"};
     }
 
-    final modelo = Problema4Model(cantidades);
+    final modelo = CantidadModel(cantidades);
     final resultados = modelo.obtenerResultados();
 
     return {

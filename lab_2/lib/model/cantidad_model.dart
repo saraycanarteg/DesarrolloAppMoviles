@@ -1,7 +1,7 @@
-class Problema4Model {
+class CantidadModel {
   final List<double> cantidades;
 
-  Problema4Model(this.cantidades);
+  CantidadModel(this.cantidades);
 
   int get contarCeros {
     return cantidades.where((num) => num == 0).length;
