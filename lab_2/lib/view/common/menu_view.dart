@@ -72,7 +72,7 @@ class MenuView extends StatelessWidget {
               _menuItem(
                 context,
                 "Problema 4",
-                "Clasificación de Cantidades",
+                "Cálculo de Descuentos en Artículos",
                 '/problema4',
               ),
             ],
