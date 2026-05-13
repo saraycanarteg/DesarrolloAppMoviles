@@ -1,0 +1,361 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf-8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{float}
+
+% Márgenes
+\geometry{left=2cm, right=2cm, top=2cm, bottom=2cm}
+
+% Colores para código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configuración de listings para código Dart
+\lstdefinestyle{dartStyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=dartStyle}
+
+% Encabezados y pies
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Servicios Básicos}
+\cfoot{\thepage}
+
+% Título
+\title{\textbf{Aplicación de Pagos de Servicios Básicos} \\ \textit{Flutter - Tarea 1.2}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1cm}
+
+% Sección 1: Introducción
+\section{Introducción}
+
+La presente aplicación móvil es una solución desarrollada en \textbf{Flutter} que permite registrar y calcular pagos de servicios básicos frecuentes. La aplicación implementa patrones de arquitectura moderna como \textbf{MVC (Modelo-Vista-Controlador)} y \textbf{Atomic Design}, garantizando un código escalable, mantenible y reutilizable.
+
+La aplicación está dirigida a usuarios que deseen:
+\begin{itemize}
+    \item Registrar información de clientes
+    \item Seleccionar tipos de servicios (agua, energía, internet, TV)
+    \item Calcular montos a pagar basados en consumo y tarifas
+    \item Aplicar descuentos o recargos
+    \item Obtener comprobantes detallados de pagos
+\end{itemize}
+
+\section{Descripción del Problema}
+
+\subsection{Objetivo General}
+
+Crear una aplicación móvil que automatice el cálculo de pagos de servicios básicos, permitiendo a los usuarios registrar datos de clientes, seleccionar servicios, ingresar consumos y obtener un resumen detallado del pago con descuentos y recargos aplicables.
+
+\subsection{Servicios Considerados}
+
+La aplicación soporta los siguientes servicios:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Servicio} & \textbf{Tarifa Base} & \textbf{Unidad} \\
+\hline
+Agua Potable & \$0.50 & por m³ \\
+\hline
+Energía Eléctrica & \$0.15 & por kWh \\
+\hline
+Internet y Telefonía & \$25.00 & valor fijo \\
+\hline
+TV por Cable & \$20.00 & valor fijo \\
+\hline
+\section{Descripción del Problema}
+
+La aplicación calcula pagos de servicios básicos: agua (\$0.50/m³), energía (\$0.15/kWh), internet y telefonía (\$25), TV por cable (\$20). 
+
+\textbf{Funcionalidades:} Registrar cliente (nombre, cédula, dirección), seleccionar servicio, ingresar consumo, aplicar descuentos/recargos y generar comprobante con cálculo: \textit{Total} = (Consumo × Tarifa) - Descuento + Recargo.
+
+\vspace{0.5cm}
+\noindent\fbox{\begin{minipage}{\textwidth}
+\textbf{Captura recomendada 1:} Pantalla principal del programa ejecutándose con el formulario completo visible.
+\end{minipage}t                    # Punto de entrada
+├── model/
+│   └── servicio_model.dart     # Modelos de datos
+├── controller/
+│   └── servicio_controller.dart # Lógica de negocio
+├── view/
+│   ├── home_servicios_view.dart           # Pantalla principal
+│   └── resultado_servicios_view.dart      # Pantalla de resultados
+└── widgets/
+    ├── atoms/                   # Componentes básicos
+    │   ├── input_text.dart
+    │   ├── custom_label.dart
+    │   ├── custom_button.dart
+    │   ├── custom_checkbox.dart
+    │   └── custom_radio.dart
+    ├── molecules/              # Combinaciones de átomos
+    │   ├── info_cliente.dart
+    │   ├── datos_consumo.dart
+    │   ├── selector_servicio.dart
+    │   ├── opciones_descuento.dart
+    │   └── opciones_recargo.dart
+    └── organisms/              # Combinaciones de moléculas
+        └── formulario_pago.dart
+\end{lstlisting}
+
+\section{Componentes del Sistema}
+
+\subsection{Modelos de Datos}
+
+Los modelos definen la estructura de los datos utilizados en la aplicación:
+
+\subsubsection{ServicioModel}
+
+Define la estructura básica de un servicio:
+
+\begin{lstlisting}[language=Dart]
+class ServicioModel {
+  final String nombre;
+  final double tarifaBase;
+  final double unidad;
+  
+  ServicioModel({
+    required this.nombre,
+    required this.tarifaBase,
+    required this.unidad,
+  });
+}
+\end{lstlisting}
+MVC + Atomic Design}
+
+\subsection{Patrón MVC}
+
+La aplicación separa responsabilidades en:
+
+\begin{itemize}
+    \item \textbf{Model:} \texttt{servicio\_model.dart} - Define \texttt{ClienteModel}, \texttt{ServicioModel}, \texttt{PagoServicioModel}
+    \item \textbf{Controller:} \texttt{servicio\_controller.dart} - Valida datos y calcula pagos
+    \item \textbf{View:} \texttt{home\_servicios\_view.dart}, \texttt{resultado\_servicios\_view.dart} - Interfaz gráfica
+\end{itemize}
+
+\subsection{Atomic Design}
+
+Estructura de carpetas:
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+lib/
+├── main.dart
+├── model/ → servicio_model.dart
+├── controller/ → servicio_controller.dart
+├── view/ → home_servicios_view.dart
+│          resultado_servicios_view.dart
+└── widgets/
+    ├── atontrolador y Lógica de Negocio}
+
+El \texttt{ServicioController} implementa:
+
+\begin{itemize}
+    \item \textbf{Tarifas}: Mapa con precios de servicios
+    \item \textbf{Validaciones}: Nombre, cédula, dirección, consumo positivo
+    \item \textbf{Cálculo}: Subtotal = Consumo × Tarifa
+    \item \textbf{Descuento/Recargo}: Porcentaje sobre subtotal
+    \item \textbf{Total}: Subtotal - Descuento + Recargo
+\end{itemize}
+
+Ejemplo de cálculo: Si agua = 50m³ × \$0.50 = \$25.00, con descuento 10\% y recargo 5\%:
+\begin{center}
+Total = \$25.00 - \$2.50 + \$1.25 = \$23.75
+\end{center}
+
+\vspace{0.3cm}
+\noindent\fbox{\begin{minipage}{\textwidth}
+\textbf{Captura recomendada 3:} Código del método \texttt{procesarPago()} en el controlador (líneas de cálculo principal).
+\end{minipage}
+\end{tabular}
+\caption{Componentes moleculares}
+\end{table}
+
+\subsection{Organismos}
+
+Composiciones complejas de moléculas:
+
+\begin{itemize}
+    \item \textbf{FormularioPago:} Combina todas las moléculas en un formulario completo
+\end{itemize}
+
+\section{Flujo de Funcionamiento}
+
+\subsection{Diagrama de Flujo}
+
+\begin{enumerate}
+    \item Usuario abre la aplicación (HomeServiciosView)
+    \item Ingresa datos del cliente (nombre, cédula, dirección)
+    \item Selecciona tipo de servicio
+    \item Ingresa consumo o valor
+    \item Opcionalmente aplica descuento o recargo
+    \item Presiona botón "Calcular"
+    \item Controlador valida y procesa la información
+    \item Se genera comprobante
+    \item Navega a ResultadoServiciosView
+    \item Muestra comprobante al usuario
+    \item Usuario puede volver atrás para nuevo registro
+\end{enumerate}
+
+\subsection{Ejemplo de Cálculo}
+
+Supongamos el siguiente escenario:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Concepto} & \textbf{Valor} \\
+\hline
+Nombre Cliente & Juan García \\
+\hline
+Servicio & Agua Potable \\
+\hline
+Consumo & 50 m³ \\
+\hline
+Tarifa & \$0.50 por m³ \\
+\hline
+\end{tabular}
+\caption{Datos de entrada}
+\end{table}
+
+\textbf{Cálculos:}
+y Widgets}
+
+\subsection{Vistas (Views)}
+
+\begin{itemize}
+    \item \textbf{HomeServiciosView}: Formulario principal con campos de cliente, servicio, consumo, descuento/recargo
+    \item \textbf{ResultadoServiciosView}: Muestra comprobante detallado con todos los cálculos
+\end{itemize}
+
+\subsection{Atomic Design - Componentes}
+
+\textbf{Átomos:} InputText, CustomLabel, CustomButton, CustomCheckbox, CustomRadio
+
+\textbf{Moléculas:} InfoCliente (3×InputText), SelectorServicio (5×CustomRadio), OpcionesDescuento (CustomCheckbox+InputText)
+
+\textbf{Organismos:} FormularioPago (combinación de moléculas)
+
+\vspace{0.3cm}
+\noindent\fbox{\begin{minipage}{\textwidth}
+\textbf{Captura recomendada 4:} Pantalla del programa con formulario lleno de datos listos para calcular.
+\end{minipage}scuentos (reducen el monto)
+    \item Recargos (aumentan el monto)
+\end{itemize}
+
+\section{Tecnologías Utilizadas}
+
+\begin{itemize}
+    \item \textbf{Flutter:} Framework para desarrollo multiplataforma
+    \item \textbf{Dart:} Lenguaje de programación
+    \item \textbf{Material Design:} Sistema de diseño Google
+    \item \textbf{Navigator:} Sistema de rutas de Flutter
+\end{itemize}
+
+\section{Requisitos Técnicos Cumplidos}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Requisito} & \textbf{Estado} \\
+\hline
+Patrón MVC & ✓ Implementado \\
+\hline
+Atomic Design & ✓ Implementado \\
+\hline
+Sistema de Rutas & ✓ Implementado \\
+\hline
+Separación de Carpetas & ✓ Implementado \\
+\hline
+Cajas de Texto & ✓ Implementadas \\
+\hline
+Labels & ✓ Implementados \\
+\hline
+Botones & ✓ Implementados \\
+\hline
+CheckBox & ✓ Implementados \\
+\hline
+RadioButton & ✓ Implementados \\
+\hline
+Interfaz Clara y Funcional & ✓ Implementada \\
+\hline
+\end{tabular}
+\caption{Estado de requisitos}
+\end{table}
+
+\section{Conclusiones}
+
+La aplicación de \textbf{Pagos de Servicios Básicos} representa una solución completa y escalable para el cálculo automatizado de tarifas de servicios. 
+
+\subsection{Logros Principales}
+
+\begin{itemize}
+    \item Implementación exitosa del patrón MVC
+    \item Aplicación consistente de Atomic Design
+    \item Interfaz intuitiva y funcional
+    \item Lógica de negocio clara y validable
+    \item Código modular y reutilizable
+    \item Sistema de navegación robusto
+\end{itemize}
+
+\subsection{Ventajas del Diseño}
+
+\begin{itemize}
+    \item \texty Funcionamiento}
+
+\begin{enumerate}
+    \item Usuario ingresa datos (nombre, cédula, dirección)
+    \item Selecciona servicio con RadioButton
+    \item Ingresa consumo/valor y opcionales descuento/recargo
+    \item Presiona "Calcular"
+    \item Controller valida y genera comprobante
+    \item Navega a pantalla de resultados
+\end{enumerate}
+
+\vspace{0.3cm}
+\noindent\fbox{\begin{minipage}{\textwidth}
+\textbf{Captura recomendada 5:} Pantalla de resultados mostrando el comprobante completo generado.
+\end{minipage}}
+
+\vspace{0.5cm}
+
+\section{Requisitos Cumplidos}
+
+\begin{itemize}
+    \item ✓ MVC: Modelos, Controlador, Vistas separados
+    \item ✓ Atomic Design: Átomos, Moléculas, Organismos
+    \item ✓ Rutas: push, pop, pushNamed
+    \item ✓ Cajas de texto, Labels, Botones, CheckBox, RadioButton
+    \item ✓ Validaciones de datos
+    \item ✓ Cálculos automáticos
+    \item ✓ Generación de comprobante

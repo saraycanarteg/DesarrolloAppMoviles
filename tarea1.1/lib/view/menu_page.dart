@@ -3,6 +3,7 @@ import 'cajero_view.dart';
 import 'vuelto_view.dart';
 import 'bisiesto_view.dart';
 import 'perfecto_view.dart';
+import 'peso_view.dart';
 
 class MenuPage extends StatelessWidget {
   @override
@@ -61,6 +62,18 @@ class MenuPage extends StatelessWidget {
                 );
               },
               child: Text("Ejercicio 4 - Número Perfecto"),
+            ),
+
+            SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PesoPage()),
+                );
+              },
+              child: Text("Ejercicio 5 - Control de Peso"),
             ),
 
           ],
