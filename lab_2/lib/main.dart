@@ -5,6 +5,8 @@ import 'view/problema1/home_page_view.dart';
 import 'view/problema1/resultado_page_view.dart';
 import 'view/problema2/profesor_view.dart';
 import 'view/problema2/resultado_profesor_view.dart';
+import 'view/problema4/home_page_view.dart' as problema4;
+import 'view/problema4/resultado_page_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,6 +26,8 @@ class MyApp extends StatelessWidget {
         '/resultado': (context) => ResultadoPageView(),
         '/profesor': (context) => ProfesorView(),
         '/resultado_profesor': (context) => ResultadoProfesorView(),
+        '/problema4': (context) => problema4.Problema4HomeView(),
+        '/resultado_problema4': (context) => Problema4ResultadoView(),
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),

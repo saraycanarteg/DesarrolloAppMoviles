@@ -57,6 +57,15 @@ class MenuView extends StatelessWidget {
                 "Incremento Salarial Profesor",
                 '/profesor',
               ),
+
+              const SizedBox(height: 20),
+
+              _menuItem(
+                context,
+                "Problema 4",
+                "Clasificación de Cantidades",
+                '/problema4',
+              ),
             ],
           ),
         ),
