@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'cajero_view.dart';
 import 'vuelto_view.dart';
+import 'bisiesto_view.dart';
+import 'perfecto_view.dart';
 
 class MenuPage extends StatelessWidget {
   @override
@@ -35,6 +37,30 @@ class MenuPage extends StatelessWidget {
                 );
               },
               child: Text("Ejercicio 2 - Vuelto"),
+            ),
+
+            SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BisiestoPage()),
+                );
+              },
+              child: Text("Ejercicio 3 - Año Bisiesto"),
+            ),
+
+            SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PerfectoPage()),
+                );
+              },
+              child: Text("Ejercicio 4 - Número Perfecto"),
             ),
 
           ],
