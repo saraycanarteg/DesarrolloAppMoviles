@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'viewmodels/correo_viewmodel.dart';
-import 'views/home_page.dart';
+import 'views/splash_page.dart';
 
 void main() {
   runApp(
@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.white,
         ),
       ),
-      home: const HomePage(),
+      home: const SplashPage(),
     );
   }
 }
+
