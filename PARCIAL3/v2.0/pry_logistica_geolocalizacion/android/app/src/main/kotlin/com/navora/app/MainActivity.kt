@@ -1,4 +1,4 @@
-package com.example.pry_logistica_geolocalizacion
+package com.navora.app
 
 import io.flutter.embedding.android.FlutterActivity
 

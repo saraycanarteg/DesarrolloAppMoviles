@@ -3,8 +3,8 @@
 // con cédula y datos del vehículo. Todo es Dart puro, sin Firebase.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pry_logistica_geolocalizacion/core/utils/validadores.dart';
-import 'package:pry_logistica_geolocalizacion/model/data/models/repartidor_model.dart';
+import 'package:Navora/core/utils/validadores.dart';
+import 'package:Navora/model/data/models/repartidor_model.dart';
 
 void main() {
   group('Validadores.cedulaEcuatoriana', () {

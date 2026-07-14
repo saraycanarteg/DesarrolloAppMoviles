@@ -4,9 +4,9 @@
 // repartidor con filtros de estado y rango de fechas.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pry_logistica_geolocalizacion/core/utils/filtros.dart';
-import 'package:pry_logistica_geolocalizacion/model/domain/entities/pedido_entity.dart';
-import 'package:pry_logistica_geolocalizacion/model/domain/entities/repartidor_entity.dart';
+import 'package:Navora/core/utils/filtros.dart';
+import 'package:Navora/model/domain/entities/pedido_entity.dart';
+import 'package:Navora/model/domain/entities/repartidor_entity.dart';
 
 RepartidorEntity repartidor({
   required String uid,

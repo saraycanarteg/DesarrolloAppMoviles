@@ -12,6 +12,8 @@
 .swiftpm/
 migrate_working_dir/
 
+build/
+
 # IntelliJ related
 *.iml
 *.ipr
@@ -45,3 +47,5 @@ app.*.map.json
 /android/app/release
 
 /CLAUDE.md
+
+android/app/google-services.json

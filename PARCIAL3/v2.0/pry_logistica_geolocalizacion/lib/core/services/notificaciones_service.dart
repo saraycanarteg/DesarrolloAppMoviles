@@ -44,7 +44,7 @@ class NotificacionesService {
         final notificacion = mensaje.notification;
         if (notificacion != null) {
           mostrar(
-            titulo: notificacion.title ?? 'Logística App',
+            titulo: notificacion.title ?? 'Navora',
             cuerpo: notificacion.body ?? '',
           );
         }

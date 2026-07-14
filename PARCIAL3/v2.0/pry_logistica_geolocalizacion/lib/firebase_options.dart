@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyB18dECEmQucwM6EGlVcyPHsFWeshakwUQ',
-    appId: '1:971887762159:android:5fdd0d130cae6aa684d91a',
+    appId: '1:971887762159:android:5ded6e7e38a7b38584d91a',
     messagingSenderId: '971887762159',
     projectId: 'pry-logistica-geolocalizacion',
     databaseURL: 'https://pry-logistica-geolocalizacion-default-rtdb.firebaseio.com',
@@ -79,7 +79,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyATez398Nd68045QbJJFokfQE-ftpDcsLs',
-    appId: '1:971887762159:web:6986cb326629687d84d91a',
+    appId: '1:971887762159:web:114233d27132939584d91a',
     messagingSenderId: '971887762159',
     projectId: 'pry-logistica-geolocalizacion',
     authDomain: 'pry-logistica-geolocalizacion.firebaseapp.com',

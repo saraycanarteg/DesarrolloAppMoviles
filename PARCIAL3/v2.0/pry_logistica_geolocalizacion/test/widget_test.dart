@@ -7,11 +7,11 @@
 //  - Parseo de modelos desde mapas de Firebase
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pry_logistica_geolocalizacion/core/utils/geo_utils.dart';
-import 'package:pry_logistica_geolocalizacion/model/data/models/direccion_model.dart';
-import 'package:pry_logistica_geolocalizacion/model/data/models/ruta_model.dart';
-import 'package:pry_logistica_geolocalizacion/model/data/models/ubicacion_model.dart';
-import 'package:pry_logistica_geolocalizacion/model/domain/entities/pedido_entity.dart';
+import 'package:Navora/core/utils/geo_utils.dart';
+import 'package:Navora/model/data/models/direccion_model.dart';
+import 'package:Navora/model/data/models/ruta_model.dart';
+import 'package:Navora/model/data/models/ubicacion_model.dart';
+import 'package:Navora/model/domain/entities/pedido_entity.dart';
 
 void main() {
   group('GeoUtils.calcularDistanciaHaversine', () {

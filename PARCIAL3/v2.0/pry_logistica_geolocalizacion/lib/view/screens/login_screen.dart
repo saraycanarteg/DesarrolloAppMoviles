@@ -70,21 +70,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Icon(
-                        Icons.local_shipping,
-                        size: 72,
-                        color: AppTheme.colorPrimario,
+                      Image.asset(
+                        'assets/icon/logoNavora.png',
+                        width: 360,
+                        height: 360,
                       ),
-                      const SizedBox(height: 12),
-                      const Text(
-                        'Logística App',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
-                          color: AppTheme.colorPrimario,
-                        ),
-                      ),
+                      const SizedBox(height: 8),
                       Text(
                         'Inicia sesión para continuar',
                         textAlign: TextAlign.center,
@@ -108,10 +99,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _ocultarPassword ? Icons.visibility_off : Icons.visibility,
+                              _ocultarPassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                             ),
                             onPressed: () {
-                              setState(() => _ocultarPassword = !_ocultarPassword);
+                              setState(
+                                () => _ocultarPassword = !_ocultarPassword,
+                              );
                             },
                           ),
                         ),
@@ -119,7 +114,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         validator: Validadores.password,
                       ),
                       const SizedBox(height: 16),
-                      if (viewModel.state == AuthState.error && viewModel.errorMessage != null)
+                      if (viewModel.state == AuthState.error &&
+                          viewModel.errorMessage != null)
                         Padding(
                           padding: const EdgeInsets.only(bottom: 16),
                           child: Text(
@@ -129,12 +125,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ElevatedButton(
-                        onPressed: viewModel.state == AuthState.loading ? null : _submitLogin,
+                        onPressed: viewModel.state == AuthState.loading
+                            ? null
+                            : _submitLogin,
                         child: viewModel.state == AuthState.loading
                             ? const SizedBox(
                                 width: 24,
                                 height: 24,
-                                child: CircularProgressIndicator(strokeWidth: 2.5),
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2.5,
+                                ),
                               )
                             : const Text('Entrar'),
                       ),
@@ -142,7 +142,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         'Las cuentas de repartidor las crea el administrador.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey.shade500,
+                        ),
                       ),
                     ],
                   ),

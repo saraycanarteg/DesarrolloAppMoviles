@@ -6,7 +6,6 @@ import 'firebase_options.dart';
 
 import 'core/services/notificaciones_service.dart';
 import 'core/theme/app_theme.dart';
-import 'core/utils/seed_data.dart';
 import 'model/data/datasources/auth_remote_datasource.dart';
 import 'model/data/datasources/database_remote_datasource.dart';
 import 'model/data/datasources/geocodificacion_remote_datasource.dart';
@@ -50,12 +49,7 @@ import 'viewmodel/tracking_viewmodel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  // Semilla de datos de prueba (deshabilitar para producción)
-  await seedDatosIniciales();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // ===== Servicios =====
   // FCM + notificaciones locales (pedido propuesto, entrega confirmada)
@@ -73,36 +67,55 @@ void main() async {
 
   final authRepository = AuthRepositoryImpl(authDataSource);
   final pedidoRepository = PedidoRepositoryImpl(databaseDataSource);
-  final ubicacionRepository = UbicacionRepositoryImpl(locationDataSource, databaseDataSource);
+  final ubicacionRepository = UbicacionRepositoryImpl(
+    locationDataSource,
+    databaseDataSource,
+  );
   final rutaRepository = RutaRepositoryImpl(rutaDataSource, databaseDataSource);
-  final geocodificacionRepository = GeocodificacionRepositoryImpl(geocodificacionDataSource);
+  final geocodificacionRepository = GeocodificacionRepositoryImpl(
+    geocodificacionDataSource,
+  );
 
   // ===== Casos de uso =====
   final loginUseCase = LoginUseCase(authRepository);
   final registrarRepartidorUseCase = RegistrarRepartidorUseCase(authRepository);
   final cambiarPasswordUseCase = CambiarPasswordUseCase(authRepository);
-  final actualizarRepartidorUseCase = ActualizarRepartidorUseCase(pedidoRepository);
+  final actualizarRepartidorUseCase = ActualizarRepartidorUseCase(
+    pedidoRepository,
+  );
   final eliminarRepartidorUseCase = EliminarRepartidorUseCase(pedidoRepository);
 
   final asignarRepartidorUseCase = AsignarRepartidorUseCase(pedidoRepository);
   final aceptarPedidoUseCase = AceptarPedidoUseCase(pedidoRepository);
   final rechazarPedidoUseCase = RechazarPedidoUseCase(pedidoRepository);
-  final observarPedidoPropuestoUseCase = ObservarPedidoPropuestoUseCase(pedidoRepository);
-  final observarTodosLosPedidosUseCase = ObservarTodosLosPedidosUseCase(pedidoRepository);
+  final observarPedidoPropuestoUseCase = ObservarPedidoPropuestoUseCase(
+    pedidoRepository,
+  );
+  final observarTodosLosPedidosUseCase = ObservarTodosLosPedidosUseCase(
+    pedidoRepository,
+  );
   final iniciarRutaUseCase = IniciarRutaUseCase(pedidoRepository);
   final marcarRecogidoUseCase = MarcarRecogidoUseCase(pedidoRepository);
   final iniciarRutaClienteUseCase = IniciarRutaClienteUseCase(pedidoRepository);
   final marcarEntregadoUseCase = MarcarEntregadoUseCase(pedidoRepository);
   final crearPedidoUseCase = CrearPedidoUseCase(pedidoRepository);
-  final observarRepartidoresUseCase = ObservarRepartidoresUseCase(pedidoRepository);
+  final observarRepartidoresUseCase = ObservarRepartidoresUseCase(
+    pedidoRepository,
+  );
 
   final iniciarTrackingUseCase = IniciarTrackingUseCase(ubicacionRepository);
-  final observarUbicacionRepartidorUseCase = ObservarUbicacionRepartidorUseCase(ubicacionRepository);
+  final observarUbicacionRepartidorUseCase = ObservarUbicacionRepartidorUseCase(
+    ubicacionRepository,
+  );
   final obtenerRutaUseCase = ObtenerRutaUseCase(rutaRepository);
   final calcularRutaDirectaUseCase = CalcularRutaDirectaUseCase(rutaRepository);
 
-  final buscarDireccionUseCase = BuscarDireccionUseCase(geocodificacionRepository);
-  final obtenerDireccionUseCase = ObtenerDireccionUseCase(geocodificacionRepository);
+  final buscarDireccionUseCase = BuscarDireccionUseCase(
+    geocodificacionRepository,
+  );
+  final obtenerDireccionUseCase = ObtenerDireccionUseCase(
+    geocodificacionRepository,
+  );
 
   runApp(
     MultiProvider(
@@ -167,7 +180,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Logística App',
+      title: 'Navora',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.claro,
       // Español para los widgets de Material (p. ej. el selector de rango
