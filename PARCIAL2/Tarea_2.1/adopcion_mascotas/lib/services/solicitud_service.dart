@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/solicitud.dart';
 
 class SolicitudService {
-  final String baseUrl = 'http://127.0.0.1:8000/solicitudes';
+  final String baseUrl = 'http://10.40.57.172:8000/solicitudes/';
 
   Future<List<Solicitud>> getAll() async {
     final resp = await http.get(Uri.parse(baseUrl));
@@ -27,7 +27,7 @@ class SolicitudService {
 
   Future<Solicitud> aprobar(int id) async {
     final resp = await http.put(
-      Uri.parse('$baseUrl/$id'),
+      Uri.parse('$baseUrl$id'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'aprobada': true}),
     );
@@ -36,7 +36,7 @@ class SolicitudService {
   }
 
   Future<void> delete(int id) async {
-    final resp = await http.delete(Uri.parse('$baseUrl/$id'));
+    final resp = await http.delete(Uri.parse('$baseUrl$id'));
     if (resp.statusCode != 204) throw Exception('Error al eliminar solicitud');
   }
 }

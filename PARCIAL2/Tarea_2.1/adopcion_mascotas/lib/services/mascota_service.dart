@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/mascota.dart';
 
 class MascotaService {
-  final String baseUrl = 'http://127.0.0.1:8000/mascotas'; // emulador Android
+  final String baseUrl = 'http://10.40.57.172:8000/mascotas/';// emulador Android
 
   Future<List<Mascota>> getAll() async {
     final resp = await http.get(Uri.parse(baseUrl));
@@ -33,7 +33,7 @@ class MascotaService {
 
   Future<Mascota> update(int id, Mascota mascota) async {
     final resp = await http.put(
-      Uri.parse('$baseUrl/$id'),
+      Uri.parse('$baseUrl$id'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(mascota.toJson()),
     );
@@ -45,7 +45,7 @@ class MascotaService {
   }
 
   Future<void> delete(int id) async {
-    final resp = await http.delete(Uri.parse('$baseUrl/$id'));
+    final resp = await http.delete(Uri.parse('$baseUrl$id'));
     if (resp.statusCode != 204) throw Exception('Error al eliminar mascota');
   }
 }
