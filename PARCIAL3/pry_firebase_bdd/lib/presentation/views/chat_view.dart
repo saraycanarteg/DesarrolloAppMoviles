@@ -12,7 +12,7 @@ class ChatView extends ConsumerStatefulWidget {
 
 class _ChatViewState extends ConsumerState<ChatView> {
   late TextEditingController controller;
-  final String usuario = "UsuarioDemo";
+  int? _ultimoTimestampVisto;
 
   @override
   void initState() {
@@ -30,6 +30,7 @@ class _ChatViewState extends ConsumerState<ChatView> {
     final texto = controller.text.trim();
     if (texto.isEmpty) return;
 
+    final usuario = ref.read(currentUserProvider);
     ref.read(firebaseServiceProvider).enviarMensaje(
           Mensaje(
             texto: texto,
@@ -42,13 +43,47 @@ class _ChatViewState extends ConsumerState<ChatView> {
 
   @override
   Widget build(BuildContext context) {
+    final usuario = ref.watch(currentUserProvider);
     final mensajesAsync = ref.watch(mensajesProvider);
+
+    // Notifica localmente cuando llega un mensaje nuevo de OTRO usuario.
+    // La primera emisión del stream (historial) solo fija la marca, sin notificar.
+    ref.listen<AsyncValue<List<Mensaje>>>(mensajesProvider, (previous, next) {
+      final mensajes = next.value;
+      if (mensajes == null || mensajes.isEmpty) return;
+
+      final ultimo = mensajes.last;
+
+      if (_ultimoTimestampVisto == null) {
+        _ultimoTimestampVisto = ultimo.timestamp;
+        return;
+      }
+
+      if (ultimo.timestamp > _ultimoTimestampVisto! && ultimo.autor != usuario) {
+        ref.read(notificationServiceProvider).mostrarNotificacionMensaje(
+              autor: ultimo.autor,
+              texto: ultimo.texto,
+            );
+      }
+
+      _ultimoTimestampVisto = ultimo.timestamp;
+    });
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chat en Tiempo Real'),
         centerTitle: true,
         elevation: 2,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(20),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Text(
+              'Conectado como: $usuario',
+              style: const TextStyle(fontSize: 12, color: Colors.white70),
+            ),
+          ),
+        ),
       ),
       body: Column(
         children: [

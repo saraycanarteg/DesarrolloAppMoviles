@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'firebase_options.dart';
 import 'presentation/views/chat_view.dart';
+import 'presentation/providers/chat_provider.dart';
 import 'data/services/notification_service.dart';
 import 'data/services/firebase_service.dart';
 
@@ -31,8 +32,12 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   runApp(
-    const ProviderScope(
-      child: MyApp(),
+    ProviderScope(
+      overrides: [
+        // Reutiliza la instancia ya inicializada (permisos + token guardado)
+        notificationServiceProvider.overrideWithValue(notificationService),
+      ],
+      child: const MyApp(),
     ),
   );
 }
